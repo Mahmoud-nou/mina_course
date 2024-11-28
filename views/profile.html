@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile page</title>
+</head>
+<body>
+    <h2>profile page</h2>
+
+    <h1>welcome {{ username }}</h1>
+    <h2>language {{lang}}</h2>
+    <h3> user data {{user}}</h3>
+    <!-- <h3>{{ 'i am' if iam else 'not i am' }}</h3> -->
+    {% if iam %}
+
+    <a href="#">Edite First Name</a>
+    <h2>iam</h2>
+
+    {% else %}
+
+    <h2>not iam</h2>
+    
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home page</title>
+
+  <!-- For mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <form action="/update_todo/{{ todo['todo_id'] }}" method="post">
+    <p>{{ todo['todo_id'] }}</p>
+    <input type="text" name="update_todo" value="{{ todo['todo'] }}">
+    <input type="submit" value="update">
+  </form>
+
+</body>
+</html>

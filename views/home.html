@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="{{ lang.lower() }}">
+<head>
+  <meta charset="UTF-8">
+  <title>Home page</title>
+
+  <!-- For mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    table {
+      width: 100%;
+    }
+    table, td {
+      border: 1px solid black;
+    }
+    thead {
+      text-transform: uppercase;
+      font-weight: bold;
+      background-color: brown;
+      color: white;
+    }
+
+    form {
+      border: 1px solid black;
+      text-align: center;
+      
+      {% if cookie %}
+      display: inline-block;
+      border: none;
+      {% endif %}
+    }
+    form div {
+      padding: 10px 0;
+    }
+    h1 {
+      text-align: center
+    }
+  </style>
+
+  <link rel="stylesheet" href="/static/css/test.css">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}"> -->
+</head>
+<body>
+
+  
+  {% if not cookie %}
+  <h1>Signup</h1>
+
+  <form action="/{{ lang }}/API/" method="post">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" name="signup_username" id="username">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" name="signup_password" id="password">
+    </div>
+    <div>
+      <label for="repassword">Repeat Password:</label>
+      <input type="password" name="signup_repassword" id="repassword">
+    </div>
+    <div>
+      <label for="first_name">first name:</label>
+      <input type="text" name="first_name" id="first_name">
+    </div>
+    <div>
+      <label for="last_name">last name:</label>
+      <input type="text" name="last_name" id="last_name">
+    </div>
+    <div>
+      <label for="gender">gender:</label>
+      <input type="text" name="gender" id="gender">
+    </div>
+    <div>
+      <label for="date_of_birth">date of birth:</label>
+      <input type="text" name="date_of_birth" id="date_of_birth">
+    </div>
+    <div>
+      <label for="profile_img">image</label>
+      <input type="text" name="profile_img" id="profile_img">
+    </div>
+    <div>
+      <input type="submit" value="Signup">
+    </div>
+  </form>
+
+  <h1>Signin</h1>
+
+  <form action="/{{ lang }}/API/" method="post">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" name="signin_username" id="username" value="{{un}}">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" name="signin_password" id="password" value="{{ps}}">
+    </div>
+    <div style="display: none;">
+      <input type="text" name="signin_url" value="{{url}}">
+    </div>
+    <div>
+      <input type="submit" value="Signin">
+    </div>
+    <div style="color: red;">
+      {{ err }}
+    </div>
+  </form>
+  {% else %}
+  <h1>Welcome {{ cookie }}</h1>
+
+  <form action="/{{ lang }}/API/" method="post">
+    <div style="display: none;">
+      <input type="text" name="logout_url" value="{{url}}">
+    </div>
+    <div>
+      <input type="submit" value="Logout">
+    </div>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <td>{{ words[lang]['id'] }}</td>
+        <td>{{ words[lang]['val'] }}</td>
+        <td>{{ words[lang]['btns'] }}</td>
+      </tr>
+    </thead>
+    {% for todo in todos %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ todo['todo'] }}</td>
+      <td>
+        <a href="/update_todo/{{ todo['todo_id'] }}">Edit</a>
+
+        <form action="/{{ lang }}/API/" method="post">
+          <input hidden type="number" name="delete_todo" value="{{ todo['todo_id'] }}">
+          <input onclick="if (!confirm('Are you sure?')) { event.preventDefault() }" type="submit" value="Delete">
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <form action="/make_todo" method="post">
+    <input type="text" name="make_todo">
+    <input hidden type="number" name="user_id" value="{{ user['user_id'] }}">
+    <input type="submit" value="save">
+  </form>
+
+  <a href="/delete_all/{{ user['user_id'] }}">Delete all todos</a>
+  {% endif %}
+
+  <!-- 
+
+
+  
+
+  {% if lang %}
+  <h1>{{ lang }}</h1>
+  {% endif %} -->
+
+  <div><a href="/AR">العربية</a></div>
+  <div><a href="/EN">English</a></div>
+
+</body>
+</html>
