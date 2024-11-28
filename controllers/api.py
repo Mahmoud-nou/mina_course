@@ -19,6 +19,9 @@ from models.site_words import SiteWordsModel
 from models.users import UsersModel
 from models.profile import UserProfileModel
 
+# phone number
+from models.phone_number import PhoneNumberModel
+
 words = {}
 language = LangsModel.get_data()
 
@@ -147,4 +150,19 @@ def api_page(lang):
                 return redirect('/')
         
                     
-    abort(404)
+            # abort(404)
+            # add data for phone number
+            if ('phone_number' in request.form
+                and 'country_code' in request.form
+                and 'phone_type' in request.form):
+
+                PhoneNumberModel.add_data({
+                    'phone_number' : request.form['phone_number'],
+                    'country_code' : request.form['country_code'] ,  #'+2' if request.form['phone_number'] == 'egypt' else '+966',
+                    'phone_type' : request.form['phone_type']
+                })
+
+                return redirect('/')
+
+                
+

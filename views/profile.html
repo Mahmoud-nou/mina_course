@@ -11,8 +11,38 @@
     <h1>welcome {{ username }}</h1>
     <h2>language {{lang}}</h2>
     <h3> user data {{user}}</h3>
-    <!-- <h3>{{ 'i am' if iam else 'not i am' }}</h3> -->
-    {% if iam %}
+    <!-- <h3>{{ iam }}</h3> -->
+    {% if iam  == 'am'%}
+    <form action="/{{ lang }}/API/" method="post">
+        <div>
+            <label for="phone_number">phone number</label><br>
+            <input type="text" name="phone_number" id="phone_number" placeholder="1207888338">
+        </div>
+        <div>
+            <label for="country_code">country code</label><br>
+            <input list="country_code"  name="country_code">
+            <datalist id="country_code">
+                <option value="egypt">
+                <option value="Kse">
+            </datalist>
+        </div>
+        <div>
+            <label for="phone_type">phone type</label><br>
+            <input list="phone_type"  name="phone_type">
+            <datalist id="phone_type">
+                <option value="whatsapp">
+                <option value="snapchat">
+                <option value="call">
+                <option value="tellegram">
+            </datalist>
+        </div>
+        <!-- <div style="display: none;">
+            <input type="text" name="phone_url" value="{{url}}">
+        </div> -->
+        <div>
+            <input type="submit" value="save">
+          </div>
+    </form>
 
     <a href="#">Edite First Name</a>
     <h2>iam</h2>

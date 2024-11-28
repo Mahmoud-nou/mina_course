@@ -14,10 +14,10 @@ def profile_page(lang, username):
         cookie = request.cookies.get('LOGIN')
         cookie = DataEncrypt.decrypt(cookie)
 
-        if cookie == username:
-            iam = True
-        else:
-            iam = False
+        # if cookie == username:
+        #     iam = True
+        # else:
+        #     iam = False
 
         if username == user['username']:
             return render_template(
@@ -25,6 +25,7 @@ def profile_page(lang, username):
                 username = username,
                 lang = lang,
                 user = UserProfileModel.get_data_by_pk(user['user_id']),
-                iam = iam
+                iam = 'am' if cookie == username else 'not am',
+                url = request.url
             )
     abort(404)
